@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { ShoppingBasket, Phone, User } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { useSession, signOut } from "next-auth/react"; // ✅ Import Auth hooks
+import { useSession, signOut } from "next-auth/react"; 
 
 export default function Navbar() {
   const { totalItems } = useCart();
-  const { status } = useSession(); // ✅ Check if user is logged in
+  const { status } = useSession(); 
 
   return (
     <nav className="w-full bg-white shadow-sm font-sans sticky top-0 z-50">
@@ -23,7 +23,7 @@ export default function Navbar() {
         <div className="hidden md:flex space-x-6 text-red-500 font-medium">
           <Link href="/" className="hover:text-red-700 transition">HOMEPAGE</Link>
           <Link href="/menu" className="hover:text-red-700 transition">MENU</Link>
-          <Link href="/contact" className="hover:text-red-700 transition">CONTACT</Link>
+          {/* ✅ "CONTACT" link has been removed from here */}
         </div>
 
         {/* Logo */}
@@ -39,9 +39,8 @@ export default function Navbar() {
             <span>123 456 78</span>
           </div>
 
-          {/* ✅ DYNAMIC LOGIN / SIGN OUT BUTTON */}
+          {/* Login / Sign Out Button */}
           {status === "authenticated" ? (
-            // If Logged In: Show Sign Out
             <button 
               onClick={() => signOut()} 
               className="text-gray-600 hover:text-red-500 flex items-center uppercase"
@@ -50,7 +49,6 @@ export default function Navbar() {
               <span className="hidden md:block">Sign Out</span>
             </button>
           ) : (
-            // If Logged Out: Show Login Link
             <Link href="/login" className="text-gray-600 hover:text-red-500 flex items-center">
                <User size={20} className="md:hidden" />
                <span className="hidden md:block">LOGIN</span>
